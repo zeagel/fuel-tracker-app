@@ -1,0 +1,35 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: install backend
+        run: |
+          cd fuel-tracker-be
+          npm install
+      - name: lint backend
+        run: npm run lint
+      - name: run integration tests for backend
+        run: npm run test
+      - name: install frontend
+        run: |
+          cd ../fuel-tracker-fe
+          npm install
+      - name: lint frontend
+        run: npm run lint
+      - name: build frontend
+        run: |
+          cd ../fuel-tracker-be
+          npm run build:ui
