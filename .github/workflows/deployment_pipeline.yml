@@ -23,10 +23,10 @@ jobs:
         run: |
           cd fuel-tracker-be
           touch .env
-          echo MONGODB_URI=${{ secrets.DOTENV_MONGODB_URI }} >> .env
-          echo MONGODB_TEST_URI=${{ secrets.DOTENV_MONGODB_TEST_URI }} >> .env
-          echo JWT_SECRET=${{ secrets.DOTENV_JWT_SECRET }} >> .env
-          echo PORT=${{ secrets.DOTENV_PORT }} >> .env
+          echo MONGODB_URI=`mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}?retryWrites=true&w=majority` >> .env
+          echo MONGODB_TEST_URI=`mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}-test?retryWrites=true&w=majority` >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo PORT=5001 >> .env
           cat .env
       - name: lint backend
         run: |
