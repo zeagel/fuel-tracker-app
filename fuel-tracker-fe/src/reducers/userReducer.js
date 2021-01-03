@@ -140,7 +140,7 @@ const userReducer = (state = {}, action) => {
 };
 
 // Action creators for userReducer
-export const initializeUser = (id) => {
+export const initializeUser = () => {
   return async dispatch => {
     try {
       const user = await userService.getUserById();

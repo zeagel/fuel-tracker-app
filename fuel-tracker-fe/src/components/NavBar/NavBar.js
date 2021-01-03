@@ -43,6 +43,7 @@ const NavBar = ({ userName }) => {
           Tankkaukset
         </Menu.Item>
         <Menu.Item
+          id="loggedUser"
           as={NavLink} to='/my-details'
           position='right'
           className='menu-item-spacing'

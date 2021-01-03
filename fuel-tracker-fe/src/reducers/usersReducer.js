@@ -13,7 +13,7 @@ const usersReducer = (state = [], action) => {
 };
 
 // Action creators for usersReducer
-export const initSimpleUserList = (id) => {
+export const initSimpleUserList = () => {
   return async dispatch => {
     try {
       const users = await userService.getSimpleUserList();

@@ -9,7 +9,7 @@ import { setNotification, clearNotification } from '../../reducers/notificationR
 import Notification from '../Notification/Notification';
 import './RegistrationForm.css';
 
-const RegistrationForm = (props) => {
+const RegistrationForm = () => {
   const note = useSelector(state => state.note);
 
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const RegistrationForm = (props) => {
         postNewUser(fields, resetForm);
       }}
     >
-      {({ errors, status, touched }) => (
+      {({ errors, touched }) => (
         <div>
           <Grid textAlign='center' style={{ height: '75vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 350 }}>

@@ -16,7 +16,7 @@ import Notification from '../components/Notification/Notification';
 import { clearNotification } from '../reducers/notificationReducer';
 const loginPageLogo = require('../assets/images/logo-gasoline-pump.png');
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const note = useSelector(state => state.note);
@@ -45,12 +45,15 @@ const LoginForm = (props) => {
         <Form size='large' onSubmit={handleSubmitLogin}>
           <Segment raised>
             <Form.Input
-              fluid icon='user'
+              id='username'
+              fluid
+              icon='user'
               iconPosition='left'
               placeholder='Käyttäjätunnus'
               onChange={handleUserNameOnChange}
             />
             <Form.Input
+              id='password'
               fluid
               icon='lock'
               iconPosition='left'

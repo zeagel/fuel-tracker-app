@@ -1,13 +1,15 @@
 {
   "name": "fuel-tracker-be",
   "version": "1.0.0",
-  "description": "Full Stack Open 2020, Final Assigment: Fuel Tracker Backend",
+  "description": "Full Stack Open 2020, part 11 - Exercise 11.21: Own pipeline, Fuel Tracker Backend",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --coverage",
     "test:quiet": "cross-env NODE_ENV=test jest -i --silent",
+    "start:test": "cross-env NODE_ENV=test node ./src/index.js",
+    "test:e2e": "cd ../fuel-tracker-fe && npm run test:e2e -- --config baseUrl=http://localhost:5001",
     "build:ui": "rm -rf build && cd ../fuel-tracker-fe && npm run build --prod && cp -r build ../fuel-tracker-be/",
     "deploy:cleanOld": "rm -rf ../web && mkdir ../web",
     "deploy:prepFE": "cd ../fuel-tracker-fe && npm run build --prod && cp -r build ../web/",

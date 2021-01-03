@@ -7,7 +7,7 @@ import { addDays } from 'date-fns';
 import { addRefueling } from '../../reducers/userReducer';
 import { clearNotification } from '../../reducers/notificationReducer';
 
-const AddRefuelingModal = ({ vehicle, user }) => {
+const AddRefuelingModal = ({ vehicle }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [date, setDate] = useState('');
   const [odoMeter, setOdoMeter] = useState('');
@@ -52,7 +52,7 @@ const AddRefuelingModal = ({ vehicle, user }) => {
     setAddEndOfList(true);
   };
 
-  const handleCancelOnClick = (e) => {
+  const handleCancelOnClick = () => {
     resetAllStates();
     setModalOpen(false);
   };

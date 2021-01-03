@@ -81,7 +81,7 @@ const AddVehicleModal = ({ user, users }) => {
     }
   };
 
-  const handleAddCoOwnerOnClick = (e) => {
+  const handleAddCoOwnerOnClick = () => {
 
     // Make sure that given co-owner is not user himself.
     if (coOwner !== user.username) {

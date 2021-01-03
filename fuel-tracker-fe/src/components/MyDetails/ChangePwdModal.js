@@ -12,7 +12,7 @@ import loginService from '../../services/login';
 import { clearNotification, setNotification } from '../../reducers/notificationReducer';
 import Notification from '../Notification/Notification';
 
-const ChangePwdModal = ({ user }) => {
+const ChangePwdModal = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentPwd, setCurrentPwd] = useState('');
   const [newPwd, setNewPwd] = useState('');

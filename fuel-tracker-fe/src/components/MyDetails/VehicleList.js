@@ -22,7 +22,7 @@ const VehicleList = ({ user, users }) => {
     <>
       <div className='my-details-row' >
         {
-          user.vehicles.map((v, i) => {
+          user.vehicles.map((v) => {
             return <EditVehicleModal
               key={v.id}
               vehicle={v}

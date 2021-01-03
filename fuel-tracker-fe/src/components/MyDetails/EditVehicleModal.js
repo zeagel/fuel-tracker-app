@@ -155,7 +155,7 @@ const EditVehicleModal = ({ vehicle, user, users }) => {
     setOpenEditVehicleModal(false);
   };
 
-  const handleAddCoOwnerOnClick = (e) => {
+  const handleAddCoOwnerOnClick = () => {
 
     // Make sure that given co-owner is not user himself.
     if (coOwner !== user.username) {
