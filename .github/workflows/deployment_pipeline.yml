@@ -24,7 +24,7 @@ jobs:
         with:
           envkey_MONGODB_URI: 'mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}?retryWrites=true&w=majority'
           envkey_MONGODB_TEST_URI: 'mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}-test?retryWrites=true&w=majority'
-          envkey_JWT_SECRET: ${{ secret.JWT_SECRET }}
+          envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
           envkey_PORT: 5001
           directory: /fuel-tracker-be
           file_name: .env 
