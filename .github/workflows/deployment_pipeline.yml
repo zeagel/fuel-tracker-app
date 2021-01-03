@@ -19,6 +19,15 @@ jobs:
         run: |
           cd fuel-tracker-be
           npm install
+      - name: create .env file for backend
+        run: |
+          cd fuel-tracker-be
+          touch .env
+          echo MONGODB_URI=${{ SECRETS.DOTENV_MONGODB_URI }} >> .env
+          echo MONGODB_TEST_URI=${{ SECRETS.DOTENV_MONGODB_TEST_URI }} >> .env
+          echo JWT_SECRET=${{ SECRETS.DOTENV_JWT_SECRET }} >> .env
+          echo PORT=${{ SECRETS.DOTENV_PORT }} >> .env
+          cat .env
       - name: lint backend
         run: |
           cd fuel-tracker-be
