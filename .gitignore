@@ -5,7 +5,7 @@ node_modules
 
 # testing
 coverage
-cypress/videos/
+cypress/videos
 
 # ignore source builds (but include deployment build in web)
 fuel-tracker-fe/build
