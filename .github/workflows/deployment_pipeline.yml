@@ -19,15 +19,15 @@ jobs:
         run: |
           cd fuel-tracker-be
           npm install
-      - name: create .env file for backend
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_MONGODB_URI: 'mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}?retryWrites=true&w=majority'
-          envkey_MONGODB_TEST_URI: 'mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DATABASE }}-test?retryWrites=true&w=majority'
-          envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          envkey_PORT: 5001
-          directory: /fuel-tracker-be
-          file_name: .env 
+      - name: Create env file
+        run: |
+          cd fuel-tracker-be
+          touch .env
+          echo MONGODB_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}?retryWrites=true&w=majority" >> .env
+          echo MONGODB_TEST_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}-test?retryWrites=true&w=majority" >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo PORT=5001 >> .env
+          cat .env 
       - name: lint backend
         run: |
           cd fuel-tracker-be
@@ -35,6 +35,7 @@ jobs:
       - name: run integration tests for backend
         run: |
           cd fuel-tracker-be
+          cat .env
           npm run test
       - name: install frontend
         run: |
