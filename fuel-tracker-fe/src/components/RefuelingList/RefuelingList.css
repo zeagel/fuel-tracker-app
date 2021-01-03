@@ -1,0 +1,155 @@
+#refueling-list-container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sub-header {
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.vehicle-title-row {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FFE4D1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.vehicle-title-row a {
+  font-size: 13px;
+}
+
+.vehicle-title-row a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.refueling-title-row {
+  font-weight: bold;
+  text-decoration: underline;
+  padding-bottom: 2px !important;
+}
+
+.vehicle-title-row-right-column {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.vehicle-title-row-right-column a {
+  margin-right: 10px;
+}
+
+.vehicle-title-row-right-column a i {
+  text-decoration: none;
+}
+
+.refueling-entry-row {
+  font-size: 13px;
+  padding-bottom: 2px !important;
+  padding-top: 2px !important;
+  cursor: pointer;
+}
+
+.hl-row {
+  background-color: #ecebeb;
+}
+
+.refueling-input-block {
+  margin-bottom: 8px;
+}
+
+.refueling-input > input {
+  text-align: center !important;
+}
+
+.refueling-input.editable, .refueling-input.editable > input {
+  border-color: lightseagreen !important;
+  border-width: 2px !important;
+  background-color: #EAFFEF !important;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding-left: 5px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #dededf;
+  padding-left: 5px;
+}
+
+.react-datepicker__input-container > input {
+  text-align: center;
+}
+
+.dp-custom {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.dp-disabled {
+  background-color: white;
+  color: #b2b2b2;
+  border-color: #f0f0f1;
+}
+
+.del-refueling-modal {
+  margin-top: auto !important;
+  display: inline-block !important;
+  top: 40%;
+}
+
+.del-refueling-modal-content {
+  color: red;
+  width: 75%;
+  text-align: center;
+  margin: auto;
+}
+
+.add-new-link {
+  color: #f2711c;
+  font-size: 12px;
+  margin-right: 15px;
+}
+
+.add-new-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.add-new-link:hover i {
+  text-decoration: none;
+}
+
+.refueling-modal-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.refueling-modal-actions > button {
+  margin-left: 0 !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(119, 119, 119) !important;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgb(119, 119, 119) !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgb(119, 119, 119) !important;
+}
+
+:disabled {
+  color: rgb(0, 0, 0) !important;
+  font-weight: bold;
+}

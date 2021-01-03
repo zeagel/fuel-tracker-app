@@ -1,0 +1,68 @@
+###
+
+# Request login with valid credentials
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "tepsukka",
+    "password": "tepsukka123?"
+  }
+}
+
+###
+
+# Login with invalid password fails
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "tepsukka",
+    "password": "this is invalid password"
+  }
+}
+
+###
+
+# Login of non-existing user fails
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "this is non-existing user",
+    "password": "this is invalid password"
+  }
+}
+
+###
+
+# Login with empyt user object fails
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+  "user": {}
+}
+
+###
+
+# Login without payload fails
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+###
+
+# Verify given password
+POST http://localhost:5001/api/login/verify
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU3OTgxNDd9.DMeTTByMpNT9XPj-O1_vngqliCUlgMI6zgMINhDpHq0
+
+{
+  "user": {
+    "id": "5fafbc25ad1ce43aa8d5e38c",
+    "password": "tepsukka"
+  }
+}

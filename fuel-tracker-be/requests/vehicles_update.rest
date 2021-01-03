@@ -1,0 +1,11 @@
+###
+
+# Invalid vehicle update request; primaryVehicle parameter is mandatory when vehicle object is empty 
+PUT http://localhost:5001/api/vehicles/5fbd3c790aaa3d90c3761786/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDYyMzcwNTB9.YHdgtDns5pN3jpZ4ByQKHLTA9BX33VIUNv4zWdoyfuk
+
+{
+  "vehicle": {},
+  "userId": "5fafbc25ad1ce43aa8d5e38c"
+}

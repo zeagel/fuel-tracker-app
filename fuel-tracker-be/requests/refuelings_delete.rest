@@ -1,0 +1,13 @@
+###
+
+# Delete existing refueling entry
+DELETE http://localhost:5001/api/5fb9207e8e0f595ef14ecace
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU5Njc3MjF9.8fCyvAkfDgcKbh-RQ2UVF0L8KH3TjXAweANvY2_IPww
+
+###
+
+# Delete request without refueling id
+DELETE http://localhost:5001/api/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU5Njc3MjF9.8fCyvAkfDgcKbh-RQ2UVF0L8KH3TjXAweANvY2_IPww

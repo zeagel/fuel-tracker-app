@@ -1,0 +1,6 @@
+###
+
+# Delete user entry
+DELETE http://localhost:5001/api/users/5fc261576ea66b10436df1b3
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzI2MTU3NmVhNjZiMTA0MzZkZjFiMyIsInVzZXJuYW1lIjoidGVwc3Vra2EiLCJuYW1lIjoiVGVwcG8gVGVzdGFhamEiLCJpYXQiOjE2MDY1NzUxNDF9.MLUqIbNPm1oZAnAr2ReWpVkMgM6ZArNyJ3i_OMnne_k

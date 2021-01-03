@@ -1,0 +1,21 @@
+###
+
+# Add new refueling entry
+POST http://localhost:5001/api/refuelings
+Content-Type: application/json
+
+{
+  "refueling": {
+    "date": "2020-07-02",
+    "odoMeter": 68235,
+    "liters": 45.11
+  },
+  "vehicleId": "5f4a9db8bab7a60db9e7fe6c",
+  "userId": "5f4a9d81bab7a60db9e7fe6a"
+}
+
+###
+
+# Add new refueling without body
+POST http://localhost:5001/api/refuelings
+Content-Type: application/json

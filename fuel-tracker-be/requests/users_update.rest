@@ -1,0 +1,45 @@
+###
+
+# Update existing user entry
+PUT http://localhost:5001/api/users/5fafbc25ad1ce43aa8d5e38c/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU4MTEzMjh9.5M8zW7dD5CVpVAV4RlPuqpjPGKJajK3J6834gW_LdD8
+
+{
+  "user": {
+    "name": "Tepzu Tetzaaja"
+  }  
+}
+
+###
+
+# Request user update with non-existing user id
+PUT http://localhost:5001/api/users/5f4e6484ccd3bd4af0ab7c7e/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU4MTEzMjh9.5M8zW7dD5CVpVAV4RlPuqpjPGKJajK3J6834gW_LdD8
+
+{
+  "user": {
+    "name": "Pertti Pasanen",
+    "password": "secret",
+    "vehicles": ["5f4e760ec3f7da3743f1577d", "5f4e7616377266866e3b409f", "5f4e761d29a17887a3653411"]
+  }  
+}
+
+###
+
+# Request user update without body
+PUT http://localhost:5001/api/users/5f4e5084ccd3bd4af0ab7c7e/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU4MTEzMjh9.5M8zW7dD5CVpVAV4RlPuqpjPGKJajK3J6834gW_LdD8
+
+###
+
+# Request user update with empty user object
+PUT http://localhost:5001/api/users/5f4e5084ccd3bd4af0ab7c7e/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDU4MTEzMjh9.5M8zW7dD5CVpVAV4RlPuqpjPGKJajK3J6834gW_LdD8
+
+{
+  "user": {}
+}

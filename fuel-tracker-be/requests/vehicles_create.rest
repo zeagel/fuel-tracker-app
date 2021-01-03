@@ -1,0 +1,22 @@
+###
+
+# Add new vehicle entry
+POST http://localhost:5001/api/vehicles
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlcHN1a2thIiwiaWQiOiI1ZmFmYmMyNWFkMWNlNDNhYThkNWUzOGMiLCJpYXQiOjE2MDYyMzcwNTB9.YHdgtDns5pN3jpZ4ByQKHLTA9BX33VIUNv4zWdoyfuk
+
+{
+  "vehicle": {
+    "name": "Ford Focus",
+    "licensePlateId": "FCV-987",
+    "odoMeter": 67543
+  },
+  "userId": "5fafbc25ad1ce43aa8d5e38c",
+  "primaryVehicle": null
+}
+
+###
+
+# Add new vehicle without body
+POST http://localhost:5001/api/users
+Content-Type: application/json

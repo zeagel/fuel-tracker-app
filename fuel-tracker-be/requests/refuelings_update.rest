@@ -1,0 +1,54 @@
+###
+
+# Update existing refueling entry
+POST http://localhost:5001/api/refuelings/5f8575a1ca1566bb74c2d41a/update
+Content-Type: application/json
+
+{
+  "refueling": {
+    "date": "2020-07-13",
+    "odoMeter": 1888,
+    "liters": 44.44
+  }
+}
+
+###
+
+# Trying to update existing refueling entry without odoMeter value
+POST http://localhost:5001/api/refuelings/5f8575a1ca1566bb74c2d41a/update
+Content-Type: application/json
+
+{
+  "refueling": {
+    "date": "2020-07-13",
+    "liters": 44.44
+  }
+}
+
+###
+
+# Trying to update existing refueling entry with incorrectly named paylod object
+POST http://localhost:5001/api/refuelings/5f8575a1ca1566bb74c2d41a/update
+Content-Type: application/json
+
+{
+  "tankkaus": {
+    "date": "2020-07-13",
+    "odoMeter": 1888,
+    "liters": 44.44
+  }
+}
+
+###
+
+# Trying to update with non-existing refueling id
+POST http://localhost:5001/api/refuelings/5f8563a1ca1566bb74c2d41a/update
+Content-Type: application/json
+
+{
+  "refueling": {
+    "date": "2020-07-13",
+    "odoMeter": 1888,
+    "liters": 44.44
+  }
+}

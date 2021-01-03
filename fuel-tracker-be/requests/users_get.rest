@@ -1,0 +1,26 @@
+###
+
+# Get a user entry
+GET http://localhost:5001/api/users/foobar
+Content-Type: application/json
+
+###
+
+# Get all users
+GET http://localhost:5001/api/users
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzI2MTU3NmVhNjZiMTA0MzZkZjFiMyIsInVzZXJuYW1lIjoidGVwc3Vra2EiLCJuYW1lIjoiVGVwcG8gVGVzdGFhamEiLCJpYXQiOjE2MDY1NzUxNDF9.MLUqIbNPm1oZAnAr2ReWpVkMgM6ZArNyJ3i_OMnne_k
+
+###
+
+# Get user by user id
+GET http://localhost:5001/api/users/5f8575a0ca1566bb74c2d413
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyanTtZSI6InRlcHN1a2thIiwiaWQiOiI1Zjg1NzVhMGNhMTU2NmJiNzRjMmQ0MTMiLCJpYXQiOjE2MDM2NDc1ODV9.zQ3oC1fdCx45Lq2IEka8vuHfM92IuTZ2iVSQ3ywD5ss
+
+###
+
+# Get simple user list
+GET http://localhost:5001/api/users/simple
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzI5MTAxNTAyNmFlMWI1OWI0Y2JjYyIsInVzZXJuYW1lIjoidGVwc3Vra2EiLCJuYW1lIjoiVGVwcG8gVGVzdGFhamEiLCJpYXQiOjE2MDY1ODY2NDB9.K6bbBpNKGy78WuBYXsf-E6zrGzn7ydui_nBipOOAtdc

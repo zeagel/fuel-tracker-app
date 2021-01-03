@@ -1,0 +1,19 @@
+###
+
+# Add user entry
+POST http://localhost:5001/api/users
+Content-Type: application/json
+
+{
+  "user": {
+    "name": "Teppo Testaaja",
+    "username": "tepsukka",
+    "password": "tepsukka123?"
+  }
+}
+
+###
+
+# Add user entry without body
+POST http://localhost:5001/api/users
+Content-Type: application/json
