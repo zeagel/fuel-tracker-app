@@ -24,7 +24,7 @@ jobs:
           cd fuel-tracker-be
           touch .env
           echo MONGODB_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}?retryWrites=true&w=majority" >> .env
-          echo MONGODB_TEST_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}-test?retryWrites=true&w=majority" >> .env
+          echo TEST_MONGODB_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}-test?retryWrites=true&w=majority" >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
           echo PORT=5001 >> .env
           cat .env 
