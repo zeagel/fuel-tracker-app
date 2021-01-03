@@ -20,16 +20,22 @@ jobs:
           cd fuel-tracker-be
           npm install
       - name: lint backend
-        run: npm run lint
+        run: |
+          cd fuel-tracker-be
+          npm run lint
       - name: run integration tests for backend
-        run: npm run test
+        run: |
+          cd fuel-tracker-be
+          npm run test
       - name: install frontend
         run: |
-          cd ../fuel-tracker-fe
+          cd fuel-tracker-fe
           npm install
       - name: lint frontend
-        run: npm run lint
+        run: |
+          cd fuel-tracker-fe
+          npm run lint
       - name: build frontend
         run: |
-          cd ../fuel-tracker-be
+          cd fuel-tracker-be
           npm run build:ui
