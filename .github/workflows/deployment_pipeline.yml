@@ -31,10 +31,10 @@ jobs:
         run: |
           cd fuel-tracker-be
           npm run lint
-      - name: run integration tests for backend
-        run: |
-          cd fuel-tracker-be
-          npm run test:quiet
+      #- name: run integration tests for backend
+      #  run: |
+      #    cd fuel-tracker-be
+      #    npm run test:quiet
       - name: install frontend
         run: |
           cd fuel-tracker-fe
@@ -49,9 +49,8 @@ jobs:
           npm run build:ui
       - name: e2e tests
         uses: cypress-io/github-action@v2
+        run: cd fuel-tracker-be
         with:
-          command: |
-            cd fuel-tracker-be
-            npm run test:e2e
+          command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
