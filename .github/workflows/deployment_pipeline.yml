@@ -51,5 +51,5 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: cd fuel-tracker-be && npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+          start: cd fuel-tracker-be && npm run start:prod
+          wait-on: http://localhost:5001
