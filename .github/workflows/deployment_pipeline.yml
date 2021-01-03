@@ -50,6 +50,10 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
-          command: cd fuel-tracker-be && npm run test:e2e
-          start: cd fuel-tracker-be && npm run start:prod
+          command: |
+            cd fuel-tracker-be
+            npm run test:e2e
+          start: |
+            cd fuel-tracker-be
+            npm run start:prod
           wait-on: http://localhost:5001
