@@ -69,9 +69,9 @@ jobs:
           !contains(toJSON(github.event.commits.*.message), '#skip')
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "tankkitutka"
-          heroku_email: "mika.honkanen@gmail.com"
-          appdir: web
-          healthcheck: "https://tankkitutka.herokuapp.com/health"
+          heroku_app_name: 'tankkitutka'
+          heroku_email: 'mika.honkanen@gmail.com'
+          appdir: 'web'
+          healthcheck: 'https://tankkitutka.herokuapp.com/health'
           checkstring: '{ status: 'live and kicking!' }'
           rollbackonhealthcheckfailed: true
