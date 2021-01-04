@@ -59,9 +59,9 @@ jobs:
       - name: Prepare deployment
         run: |
           cd fuel-tracker-be
-          npm deploy:cleanOld
-          npm deploy:prepBE
-          npm deploy:prepFE
+          npm run deploy:cleanOld
+          npm run deploy:prepBE
+          npm run deploy:prepFE
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
         if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
