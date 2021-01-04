@@ -86,25 +86,36 @@ jobs:
       # to Github because deployment may still fail. Same update is
       # done in Github later in 'tag_deployment_release' job. 
       - name: Bump package.json version, PATCH
-        if: contains(toJSON(github.event.commits.*.message), '[=PATCH=]')
+        if: |
+          github.event_name == 'push' &&
+          !contains(toJSON(github.event.commits.*.message), '#skip') && 
+          contains(toJSON(github.event.commits.*.message), '[=PATCH=]')
         run: |
           cd web
           npm version patch
 
       - name: Bump package.json version, MINOR
-        if: contains(toJSON(github.event.commits.*.message), '[=MINOR=]')
+        if: |
+          github.event_name == 'push' &&
+          !contains(toJSON(github.event.commits.*.message), '#skip') &&       
+          contains(toJSON(github.event.commits.*.message), '[=MINOR=]')
         run: |
           cd web
           npm version minor
 
       - name: Bump package.json version, MAJOR
-        if: contains(toJSON(github.event.commits.*.message), '[=MAJOR=]')
+        if: |
+          github.event_name == 'push' &&
+          !contains(toJSON(github.event.commits.*.message), '#skip') &&
+          contains(toJSON(github.event.commits.*.message), '[=MAJOR=]')
         run: |
           cd web
           npm version major
 
       - name: Bump package.json version, DEFAULT (patch)
         if: |
+          github.event_name == 'push' &&
+          !contains(toJSON(github.event.commits.*.message), '#skip') &&
           !contains(toJSON(github.event.commits.*.message), '[=PATCH=]') &&
           !contains(toJSON(github.event.commits.*.message), '[=MINOR=]') &&
           !contains(toJSON(github.event.commits.*.message), '[=MAJOR=]')
@@ -113,7 +124,7 @@ jobs:
           npm version patch
 
       - name: Add deployment package in local repository
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+        if: |
           github.event_name == 'push' && 
           !contains(toJSON(github.event.commits.*.message), '#skip')
         run: |
@@ -122,7 +133,7 @@ jobs:
           git add -A && git commit -m "Deployment to Heroku"
 
       - name: Deploy to Heroku
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+        if: |
           github.event_name == 'push' && 
           !contains(toJSON(github.event.commits.*.message), '#skip')
         uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
@@ -136,7 +147,7 @@ jobs:
           appdir: "web"
 
       - name: Build OK Slack notification
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip' AND no errors in earlier steps.
+        if: |
           success() &&
           github.event_name == 'push' && 
           !contains(toJSON(github.event.commits.*.message), '#skip')        
@@ -158,7 +169,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Build failure Slack notification
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip' AND there are errors in earlier steps.
+        if: |
           !success() &&
           github.event_name == 'push' && 
           !contains(toJSON(github.event.commits.*.message), '#skip')
@@ -177,7 +188,7 @@ jobs:
 
     needs: validate_and_deploy # validate_and_deploy must be successfully completed before creating a new release tag.
 
-    if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+    if: |
       github.event_name == 'push' && 
       !contains(toJSON(github.event.commits.*.message), '#skip')
 
