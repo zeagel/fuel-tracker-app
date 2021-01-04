@@ -26,4 +26,7 @@ jobs:
           PACKAGEJSON_DIR:  'fuel-tracker-be'
         with:
           skip-tag: 'true'
+          minor-wording: '[=MINOR=]'
+          major-wording: '[=MAJOR=]'
+          patch-wording: '[=PATCH=]'
           default: patch
