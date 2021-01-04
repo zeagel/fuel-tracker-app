@@ -56,12 +56,14 @@ jobs:
       #    start: npm run start:prod
       #    command: npm run test:e2e
       #    wait-on: http://localhost:5001
-      - name: Prepare deployment
+      - name: Prepare deployment package
         run: |
           cd fuel-tracker-be
           npm run deploy:cleanOld
           npm run deploy:prepBE
           npm run deploy:prepFE
+      - name: Update changes in Github repo
+        run: git add -A && git commit -m "Deployment to Heroku"
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
         if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
@@ -75,4 +77,3 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
           appdir: "web"
-          dontuseforce: true

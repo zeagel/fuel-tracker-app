@@ -36,7 +36,7 @@ app.use('/api/refuelings', refuelingRouter);
 
 // Define additional helper endpoints
 app.get('/api/health', (req, res) => {
-  res.send({ status: 'live and kicking!' });
+  res.send('ok');
 });
 
 app.get('/api/version', (req, res) => {
