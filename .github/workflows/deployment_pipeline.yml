@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: setup node
+      - name: Set up node
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
@@ -77,7 +77,13 @@ jobs:
           npm run deploy:cleanOld
           npm run deploy:prepBE
           npm run deploy:prepFE
-
+      
+      # Bump package.json version in deployment package based on
+      # definition given in commit messages. Checking order is PATCH ->
+      # MINOR -> MAJOR if several tags used. Default (patch) is used
+      # if none tag provided. Note that this update IS NOT committed
+      # to Github because deployment may still fail. Same update is
+      # done in Github later in 'tag_deployment_release' job. 
       - name: Bump package.json version, PATCH
         if: contains(toJSON(github.event.commits.*.message), '[=PATCH=]')
         run: |
@@ -127,3 +133,30 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
           appdir: "web"
+
+  tag_deployed_release:
+
+    needs: validate_and_deploy # validate_and_deploy must be successfully completed before creating a new release tag.
+
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name:  'Bump version and tag the deployment'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR:  'fuel-tracker-be'
+        with:
+          tag-prefix:  'v'
+          minor-wording: '[=MINOR=]'
+          major-wording: '[=MAJOR=]'
+          patch-wording: '[=PATCH=]'
+          default: patch

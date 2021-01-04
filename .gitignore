@@ -8,7 +8,7 @@ coverage
 cypress/videos
 *.mp4
 
-# ignore source builds (but include deployment build in web)
+# ignore source builds
 fuel-tracker-fe/build
 fuel-tracker-be/build
 
