@@ -1,3 +1,5 @@
+// login.spec.js
+
 describe('WHEN user opens landing page of the app', function() {
 
   it('THEN login page is shown', function() {
