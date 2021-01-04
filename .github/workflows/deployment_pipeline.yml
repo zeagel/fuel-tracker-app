@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  validate_changes:
+  validate_and_deploy:
 
     runs-on: ubuntu-18.04
     
@@ -67,23 +67,11 @@ jobs:
       #    start: npm run start:prod
       #    command: npm run test:e2e
       #    wait-on: http://localhost:5001
-
-  deploy_changes:
-
-    needs: validate_changes
     
-    if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
-      github.event_name == 'push' && 
-      !contains(toJSON(github.event.commits.*.message), '#skip')
-    
-    runs-on: ubuntu-18.04
-    
-    steps:
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Prepare deployment package
+        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+          github.event_name == 'push' && 
+          !contains(toJSON(github.event.commits.*.message), '#skip')
         run: |
           cd fuel-tracker-be
           npm run deploy:cleanOld
@@ -91,12 +79,18 @@ jobs:
           npm run deploy:prepFE
 
       - name: Add deployment package in local repository
+        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+          github.event_name == 'push' && 
+          !contains(toJSON(github.event.commits.*.message), '#skip')
         run: |
           git config user.email "fta.buildbot@github.com"
           git config user.name "FTA BuildBot"
           git add -A && git commit -m "Deployment to Heroku"
 
       - name: Deploy to Heroku
+        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+          github.event_name == 'push' && 
+          !contains(toJSON(github.event.commits.*.message), '#skip')
         uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
