@@ -8,19 +8,25 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deployment_pipeline:
+
+  validate_changes:
+
     runs-on: ubuntu-18.04
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: setup node
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+
       - name: Install backend
         run: |
           cd fuel-tracker-be
           npm install
+
       - name: Create dotenv file for backend
         run: |
           cd fuel-tracker-be
@@ -28,23 +34,28 @@ jobs:
           echo MONGODB_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}?retryWrites=true&w=majority" >> .env
           echo TEST_MONGODB_URI="mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@cluster0-nscn5.mongodb.net/${{ secrets.MONGODB_DB_NAME }}-test?retryWrites=true&w=majority" >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-          echo PORT=5001 >> .env 
+          echo PORT=5001 >> .env
+
       - name: Lint backend
         run: |
           cd fuel-tracker-be
           npm run lint
+
       #- name: Run integration tests for backend
       #  run: |
       #    cd fuel-tracker-be
       #    npm run test:quiet
+
       - name: Install frontend
         run: |
           cd fuel-tracker-fe
           npm install
+
       - name: Lint frontend
         run: |
           cd fuel-tracker-fe
           npm run lint
+          
       # - name: Make frontend production build for E2E tests
       #  run: |
       #    cd fuel-tracker-be
@@ -56,28 +67,35 @@ jobs:
       #    start: npm run start:prod
       #    command: npm run test:e2e
       #    wait-on: http://localhost:5001
+
+  deploy_changes:
+
+    needs: validate_changes
+    
+    if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+      github.event_name == 'push' && 
+      !contains(toJSON(github.event.commits.*.message), '#skip')
+    
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Prepare deployment package
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
-          github.event_name == 'push' && 
-          !contains(toJSON(github.event.commits.*.message), '#skip')
         run: |
           cd fuel-tracker-be
           npm run deploy:cleanOld
           npm run deploy:prepBE
           npm run deploy:prepFE
+
       - name: Add deployment package in local repository
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
-          github.event_name == 'push' && 
-          !contains(toJSON(github.event.commits.*.message), '#skip')
         run: |
           git config user.email "fta.buildbot@github.com"
           git config user.name "FTA BuildBot"
           git add -A && git commit -m "Deployment to Heroku"
+
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
-        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
-          github.event_name == 'push' && 
-          !contains(toJSON(github.event.commits.*.message), '#skip')
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tankkitutka"
