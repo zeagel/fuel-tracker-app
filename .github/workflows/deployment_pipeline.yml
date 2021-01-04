@@ -73,5 +73,5 @@ jobs:
           heroku_email: 'mika.honkanen@gmail.com'
           appdir: 'web'
           healthcheck: 'https://tankkitutka.herokuapp.com/api/health'
-          checkstring: '{ status: 'live and kicking!' }'
+          #checkstring: '{ status: 'live and kicking!' }'
           rollbackonhealthcheckfailed: true
