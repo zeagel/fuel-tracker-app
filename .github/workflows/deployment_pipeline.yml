@@ -60,6 +60,7 @@ jobs:
         run: |
           cd fuel-tracker-be
           npm run build:ui
+
       - name: Run E2E tests
         uses: cypress-io/github-action@v2
         with:
