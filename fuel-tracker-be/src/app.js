@@ -34,6 +34,18 @@ app.use('/api/users', userRouter);
 app.use('/api/vehicles', vehicleRouter);
 app.use('/api/refuelings', refuelingRouter);
 
+// Define additional helper endpoints
+app.get('/api/health', (req, res) => {
+  res.send({ status: 'live and kicking!' });
+});
+
+app.get('/api/version', (req, res) => {
+  res.send({
+    name: process.env.npm_package_name,
+    version: process.env.npm_package_version
+  });
+});
+
 // Handle serving the app when using Client-Side Routing.
 // Without this, refresing the current page causes error.
 // Approach adapted from here: https://tinyurl.com/y4t6zcap.

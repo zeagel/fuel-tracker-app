@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:prod": "cross-env NODE_ENV=production node ./src/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --coverage",
     "test:quiet": "cross-env NODE_ENV=test jest -i --silent",
     "start:test": "cross-env NODE_ENV=test node ./src/index.js",
