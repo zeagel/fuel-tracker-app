@@ -40,10 +40,9 @@ app.get('/api/health', (req, res) => {
 });
 
 app.get('/api/version', (req, res) => {
-  res.send({
-    name: process.env.npm_package_name,
-    version: process.env.npm_package_version
-  });
+  const path = require('path');
+  const { name, version } = require(path.join(__dirname, '..', 'package.json'));
+  res.send({ name, version });
 });
 
 // Handle serving the app when using Client-Side Routing.

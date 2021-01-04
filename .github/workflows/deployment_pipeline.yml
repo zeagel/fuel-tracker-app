@@ -78,6 +78,33 @@ jobs:
           npm run deploy:prepBE
           npm run deploy:prepFE
 
+      - name: Bump package.json version, PATCH
+        if: contains(toJSON(github.event.commits.*.message), '[=PATCH=]')
+        run: |
+          cd web
+          npm version patch
+
+      - name: Bump package.json version, MINOR
+        if: contains(toJSON(github.event.commits.*.message), '[=MINOR=]')
+        run: |
+          cd web
+          npm version minor
+
+      - name: Bump package.json version, MAJOR
+        if: contains(toJSON(github.event.commits.*.message), '[=MAJOR=]')
+        run: |
+          cd web
+          npm version major
+
+      - name: Bump package.json version, DEFAULT (patch)
+        if: |
+          !contains(toJSON(github.event.commits.*.message), '[=PATCH=]') &&
+          !contains(toJSON(github.event.commits.*.message), '[=MINOR=]') &&
+          !contains(toJSON(github.event.commits.*.message), '[=MAJOR=]')
+        run: |
+          cd web
+          npm version patch
+
       - name: Add deployment package in local repository
         if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
           github.event_name == 'push' && 

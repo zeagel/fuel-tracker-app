@@ -1,6 +1,6 @@
 {
   "name": "fuel-tracker-be",
-  "version": "2.0.0",
+  "version": "0.0.0",
   "description": "Full Stack Open 2020, part 11 - Exercise 11.21: Own pipeline, Fuel Tracker Backend",
   "main": "index.js",
   "scripts": {
