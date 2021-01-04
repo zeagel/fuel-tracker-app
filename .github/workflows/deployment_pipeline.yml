@@ -41,10 +41,10 @@ jobs:
           cd fuel-tracker-be
           npm run lint
 
-      #- name: Run integration tests for backend
-      #  run: |
-      #    cd fuel-tracker-be
-      #    npm run test:quiet
+      - name: Run integration tests for backend
+        run: |
+          cd fuel-tracker-be
+          npm run test:quiet
 
       - name: Install frontend
         run: |
@@ -56,17 +56,17 @@ jobs:
           cd fuel-tracker-fe
           npm run lint
 
-      # - name: Make frontend production build for E2E tests
-      #  run: |
-      #    cd fuel-tracker-be
-      #    npm run build:ui
-      #- name: Run E2E tests
-      #  uses: cypress-io/github-action@v2
-      #  with:
-      #    working-directory: fuel-tracker-be
-      #    start: npm run start:prod
-      #    command: npm run test:e2e
-      #    wait-on: http://localhost:5001
+      - name: Make frontend production build for E2E tests
+        run: |
+          cd fuel-tracker-be
+          npm run build:ui
+      - name: Run E2E tests
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: fuel-tracker-be
+          start: npm run start:prod
+          command: npm run test:e2e
+          wait-on: http://localhost:5001
     
       - name: Prepare deployment package
         if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
@@ -133,6 +133,44 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
           appdir: "web"
+
+      - name: Build OK Slack notification
+        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip' AND no errors in earlier steps.
+          success() &&
+          github.event_name == 'push' && 
+          !contains(toJSON(github.event.commits.*.message), '#skip')        
+        uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
+        with:
+          status: custom
+          fields: commit,author,took
+          channel: '#code'
+          icon_emoji: ':white_check_mark:'
+          custom_payload: |
+            {
+              text: '*Build Bot*',
+              attachments: [{
+                color: 'good',
+                text: `a new version deployed to https://tankkitutka.herokuapp.com (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR}, build took ${process.env.AS_TOOK}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Build failure Slack notification
+        if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip' AND there are errors in earlier steps.
+          !success() &&
+          github.event_name == 'push' && 
+          !contains(toJSON(github.event.commits.*.message), '#skip')
+        uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
+        with:
+          status: '${{ job.status }}'
+          fields: repo,message,commit,author,took
+          channel: '#code'
+          icon_emoji: ':no_entry:'
+          author_name: 'Build Bot'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
 
   tag_deployed_release:
 
