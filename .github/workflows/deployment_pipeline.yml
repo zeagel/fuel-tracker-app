@@ -62,8 +62,11 @@ jobs:
           npm run deploy:cleanOld
           npm run deploy:prepBE
           npm run deploy:prepFE
-      - name: Update changes in Github repo
-        run: git add -A && git commit -m "Deployment to Heroku"
+      - name: Add deployment package in Github
+        run: |
+          git config user.email "fta.buildbot@github.com"
+          git config user.name "FTA BuildBot"
+          git add -A && git commit -m "Deployment to Heroku"
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
         if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
