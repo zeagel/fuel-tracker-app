@@ -138,6 +138,10 @@ jobs:
 
     needs: validate_and_deploy # validate_and_deploy must be successfully completed before creating a new release tag.
 
+    if: | # executed only when the change is merged or pushed to master AND commit messages do not contain keyword '#skip'.
+      github.event_name == 'push' && 
+      !contains(toJSON(github.event.commits.*.message), '#skip')
+
     runs-on: ubuntu-18.04
     
     steps:
@@ -155,6 +159,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR:  'fuel-tracker-be'
         with:
-          tag-prefix:  'v'
           minor-wording: '[=MINOR=]'
           major-wording: '[=MAJOR=]'
