@@ -55,7 +55,7 @@ jobs:
         run: |
           cd fuel-tracker-fe
           npm run lint
-          
+
       # - name: Make frontend production build for E2E tests
       #  run: |
       #    cd fuel-tracker-be
@@ -79,6 +79,7 @@ jobs:
     runs-on: ubuntu-18.04
     
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -96,6 +97,7 @@ jobs:
           git add -A && git commit -m "Deployment to Heroku"
 
       - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@bf72a2f486f950d3c6b1be566f8717f998bbce51
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tankkitutka"
