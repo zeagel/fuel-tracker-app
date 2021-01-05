@@ -6,6 +6,8 @@ describe('WHEN user opens landing page of the app', function() {
     cy.visit('/');
     cy.contains('Kirjaudu');
     cy.contains('Ei tunnusta vielä? Rekisteröidy');
+    cy.contains('Huomio!');
+    cy.contains('Tämä on testisovellus! Sovelluksen tiedot nollataan aika ajoin ilman ennakkovaroitusta.');
   });
 
   describe('WHEN login is done with valid credentials', function() {
