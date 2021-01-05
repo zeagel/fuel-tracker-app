@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        run: git fetch --prune --unshallow
 
       - name: Set up node
         uses: actions/setup-node@v1
